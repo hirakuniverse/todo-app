@@ -49,3 +49,10 @@
 .text-green{
   color: darkgreen;
 }
+.pt-10{
+  padding-top: 10px;
+}
+.pb-10{
+  padding-bottom: 10px;
+}
+

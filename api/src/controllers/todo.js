@@ -1,5 +1,8 @@
 import TodoModel from "../models/todoModel";
 const _self = {
+    /**
+     * This api is used to retrieve list of todo task
+     */
     getTodo: async (req, res, next) => {
         try{
             let filter = {};
@@ -9,7 +12,6 @@ const _self = {
             if(req.query.filter === "1"){
                 filter = {isCompleted: true}
             }
-            console.log(filter);
             const todos = await TodoModel.find(filter);
             res.status(200).send({success: true, todos: todos});
         }catch(err){
@@ -17,6 +19,9 @@ const _self = {
         }   
         
     },
+    /**
+     * This api is used to add task in todo list
+     */
     addTodo: async (req, res, next) => {
         try{
             const todo = await new TodoModel(req.body).save();
@@ -25,6 +30,9 @@ const _self = {
             res.status(500).send({suceess: false, message: "Something went wrong", error: err});
         }
     },
+    /**
+     * This api is used to deletet task from todo list
+     */
     deleteTodo: async (req, res, next) => {
         try {
             const todo = await TodoModel.findByIdAndDelete(req.params.id);
@@ -33,6 +41,9 @@ const _self = {
             res.status(500).send({suceess: false, message: "Something went wrong", error: err});
         }
     },
+    /**
+     * This api is used to active/complete the task in todo list
+     */
     updateTodo: async (req, res, next) => {
         try {
             const todo = await TodoModel.findOneAndUpdate(
